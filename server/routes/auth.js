@@ -1,5 +1,5 @@
 import express from 'express';
-import bcrypt from 'bcryptjs';
+import bcryptjs from 'bcryptjs';
 
 import User from '../models/user.js';
 
@@ -16,7 +16,7 @@ authRouter.post("/auth/register", async(req, res)=> {
     }
 
  // create new user
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcryptjs.hash(password, 8);
     const user = new User({name, email, password: hashedPassword});
     await user.save();
 

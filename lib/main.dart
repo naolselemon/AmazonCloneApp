@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
           scaffoldBackgroundColor: GlobalVariables.greyBackgroundCOlor,
-          colorScheme: ColorScheme.light(
+          colorScheme: const ColorScheme.light(
             primary: GlobalVariables.secondaryColor,
           )),
       home: const AuthScreen(),

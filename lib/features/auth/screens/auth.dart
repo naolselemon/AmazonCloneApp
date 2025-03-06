@@ -1,4 +1,5 @@
-import 'package:amazon_clone/common/custom_textformfield.dart';
+import 'package:amazon_clone/common/widgets/custom_button.dart';
+import 'package:amazon_clone/common/widgets/custom_textformfield.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:flutter/material.dart';
 
@@ -82,6 +83,10 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                       CustomTextformfield(
                           controller: password, text: "Password"),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const CustomButton(text: "Sign up")
                     ],
                   ),
                 ),
@@ -118,6 +123,10 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                       CustomTextformfield(
                           controller: password, text: "Password"),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const CustomButton(text: "Login")
                     ],
                   ),
                 ),
