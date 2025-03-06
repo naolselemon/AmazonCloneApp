@@ -1,7 +1,7 @@
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:flutter/material.dart';
 
-import 'package:amazon_clone/features/auth/screens/auth.dart';
+import 'package:amazon_clone/features/auth/screens/auth_screens.dart';
 
 void main() {
   runApp(const MyApp());

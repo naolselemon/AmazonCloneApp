@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
+
 import 'package:amazon_clone/common/widgets/custom_button.dart';
 import 'package:amazon_clone/common/widgets/custom_textformfield.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
-import 'package:flutter/material.dart';
+import 'package:amazon_clone/features/auth/services/auth_services.dart';
 
 enum Auth {
   login,
@@ -17,9 +19,10 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   Auth _auth = Auth.register;
-  TextEditingController name = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
+  AuthServices authServices = AuthServices();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   final _signInFormKey = GlobalKey<FormState>();
   final _registerFormKey = GlobalKey<FormState>();
@@ -27,9 +30,19 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   void dispose() {
     super.dispose();
-    name.dispose();
-    email.dispose();
-    password.dispose();
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
+  void register() {
+    if (_registerFormKey.currentState!.validate()) {
+      authServices.signUpUser(
+          name: nameController.text,
+          email: emailController.text,
+          password: passwordController.text,
+          context: context);
+    }
   }
 
   @override
@@ -73,20 +86,25 @@ class _AuthScreenState extends State<AuthScreen> {
                   key: _registerFormKey,
                   child: Column(
                     children: [
-                      CustomTextformfield(controller: name, text: "Name"),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      CustomTextformfield(controller: email, text: "Email"),
+                      CustomTextformfield(
+                          controller: nameController, text: "Name"),
                       const SizedBox(
                         height: 10,
                       ),
                       CustomTextformfield(
-                          controller: password, text: "Password"),
+                          controller: emailController, text: "Email"),
                       const SizedBox(
                         height: 10,
                       ),
-                      const CustomButton(text: "Sign up")
+                      CustomTextformfield(
+                          controller: passwordController, text: "Password"),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      CustomButton(
+                        text: "Sign up",
+                        onTap: register,
+                      )
                     ],
                   ),
                 ),
@@ -117,16 +135,17 @@ class _AuthScreenState extends State<AuthScreen> {
                   key: _signInFormKey,
                   child: Column(
                     children: [
-                      CustomTextformfield(controller: email, text: "Email"),
+                      CustomTextformfield(
+                          controller: emailController, text: "Email"),
                       const SizedBox(
                         height: 10,
                       ),
                       CustomTextformfield(
-                          controller: password, text: "Password"),
+                          controller: passwordController, text: "Password"),
                       const SizedBox(
                         height: 10,
                       ),
-                      const CustomButton(text: "Login")
+                      // const CustomButton(text: "Login")
                     ],
                   ),
                 ),

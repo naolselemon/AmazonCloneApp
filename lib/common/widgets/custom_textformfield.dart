@@ -13,9 +13,17 @@ class CustomTextformfield extends StatelessWidget {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
-          hintText: text,
-          border: OutlineInputBorder(
-              borderSide: BorderSide(color: GlobalVariables.secondaryColor))),
+        hintText: text,
+        border: const OutlineInputBorder(
+          borderSide: BorderSide(color: GlobalVariables.secondaryColor),
+        ),
+      ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "Enter your $text";
+        }
+        return null;
+      },
     );
   }
 }

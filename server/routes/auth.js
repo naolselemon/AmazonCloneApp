@@ -12,7 +12,7 @@ authRouter.post("/auth/register", async(req, res)=> {
  // check existing email
     const existingEmail = await User.findOne({email: email});
     if(existingEmail){
-        return res.status(400).json({error: "Email already exists"});
+        return res.status(400).json({msg: "Email already exists"});
     }
 
  // create new user
@@ -20,7 +20,7 @@ authRouter.post("/auth/register", async(req, res)=> {
     const user = new User({name, email, password: hashedPassword});
     await user.save();
 
-    res.status(201).json({message: "User registered successfully", user});
+    res.status(200).json({message: "User registered successfully", user});
 
     }catch(e){
         res.status(500).json({error: "Failed to register user", e});
